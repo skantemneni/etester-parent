@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://www.rulefree.com/RfLoadDataSchema" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+	xmlns:inc="http://www.w3.org/2004/08/xop/include"
+   	targetNamespace="http://www.rulefree.com/RfLoadDataSchema"
+	elementFormDefault="qualified">
+
+	<xs:include schemaLocation="RfSchemaTypes.xsd" />
+
+	<xs:element name="testRequestChoice" type="testRequestChoice_Type" />
+	<xs:complexType name="testRequestChoice_Type">
+		<xs:choice>
+			<xs:element ref="testsByIdArray"/>
+			<xs:element ref="testsByChannelIdAndProviderName" />
+			<xs:element ref="testsByChannelId"/>
+			<xs:element ref="testsByProviderName" />
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:element name="provider_name" type="base_username_type" />
+
+	<xs:element name="testsByChannelIdAndProviderName" type="testsByChannelIdAndProviderName_type" />
+	<xs:complexType name="testsByChannelIdAndProviderName_type">
+		<xs:sequence>
+			<xs:element ref="id_channel"/>
+			<xs:element ref="provider_name"/>
+			<xs:element ref="testtype"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="testsByChannelId" type="testsByChannelId_type" />
+	<xs:complexType name="testsByChannelId_type">
+		<xs:sequence>
+			<xs:element ref="id_channel"/>
+			<xs:element ref="testtype"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="testsByProviderName" type="testsByProviderName_type" />
+	<xs:complexType name="testsByProviderName_type">
+		<xs:sequence>
+			<xs:element ref="provider_name"/>
+			<xs:element ref="testtype"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="testsByIdArray" type="testsByIdArray_type" />
+	<xs:complexType name="testsByIdArray_type">
+		<xs:sequence>
+			<xs:element ref="testIdArray"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="testIdArray" type="testIdArray_type" />
+	<xs:complexType name="testIdArray_type">
+		<xs:sequence>
+			<xs:element ref="id_test" minOccurs="0" maxOccurs="9999"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="id_test" type="id_test_type" />
+	
+	<xs:simpleType name="id_test_type">
+		<xs:restriction base="xs:long">
+			<xs:minInclusive value="0" />
+			<xs:maxInclusive value="9999999999999" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:element name="id_testsegment" type="id_testsegment_type" />
+	
+	<xs:simpleType name="id_testsegment_type">
+		<xs:restriction base="xs:long">
+			<xs:minInclusive value="0" />
+			<xs:maxInclusive value="999999999999999" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:element name="id_testsection" type="id_testsection_type" />
+	<xs:simpleType name="id_testsection_type">
+		<xs:restriction base="xs:long">
+			<xs:minInclusive value="0" />
+			<xs:maxInclusive value="99999999999999999" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:element name="id_testsynopsislink" type="id_testsynopsislink_type" />
+	<xs:simpleType name="id_testsynopsislink_type">
+		<xs:restriction base="xs:long">
+			<xs:minInclusive value="0" />
+			<xs:maxInclusive value="99999999999999999" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- id_artifact can be any id starting from a id_level to a id_skill -->
+	<xs:simpleType name="id_artifact_type">
+		<xs:restriction base="xs:long">
+			<xs:minInclusive value="100000" />
+			<xs:maxInclusive value="99999999999" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:element name="testArray" type="testArray_type" />
+	<xs:complexType name="testArray_type">
+		<xs:sequence>
+			<xs:element ref="test" minOccurs="0" maxOccurs="9999"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="test" type="test_type" />
+	<xs:complexType name="test_type">
+		<xs:sequence>
+			<xs:element ref="id_test" minOccurs="1"/>
+			<xs:element ref="id_channel" />
+			<xs:element ref="provider_name"/>
+			<xs:element name="id_organization" type="xs:long" />
+			<xs:element name="name" type="base_shorttext_type" minOccurs="1" />
+			<xs:element name="description" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="text" type="xs:string" minOccurs="0" />
+			<xs:element name="addl_info" type="xs:string" minOccurs="0" />
+			<xs:element ref="testtype" />
+			<xs:element name="test_level" type="xs:string" minOccurs="0" />
+			<xs:element name="timed" type="xs:boolean" default="true" />
+			<xs:element name="time_to_answer" type="xs:nonNegativeInteger" default="10" />
+			<xs:element name="published" type="xs:boolean" default="true" />
+			<xs:element ref="test_access_level" />
+			<xs:element name="is_practice" type="xs:boolean" default="false" />
+			<xs:element name="question_count" type="xs:int" />
+			<xs:element name="point_count" type="xs:float" />
+			<xs:element name="auto_grade" type="xs:boolean" default="true" />
+			<xs:element name="auto_publish_results" type="xs:boolean" default="true" />
+			<xs:element ref="examtrack" />
+			<xs:element name="is_free" type="xs:boolean" default="false" />
+			<xs:element name="report_by_subject" type="xs:boolean" default="false" />
+			<xs:element name="combine_sections" type="xs:boolean" default="false" />
+ 			<xs:element ref="testsegmentArray" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="testsegmentArray" type="testsegmentArray_type" />
+	<xs:complexType name="testsegmentArray_type">
+		<xs:sequence>
+			<xs:element ref="testsegment" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="testsegment" type="testsegment_type" />
+	<xs:complexType name="testsegment_type">
+		<xs:sequence>
+			<xs:element ref="id_testsegment" />
+			<xs:element name="name" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="description" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="text" type="xs:string" minOccurs="0" />
+			<xs:element name="addl_info" type="xs:string" minOccurs="0" />
+			<xs:element name="seq" type="xs:int" />
+			<xs:element name="published" type="xs:boolean" default="true" />
+			<xs:element name="sectionwrapper" type="xs:boolean" default="true" />
+			<xs:element name="question_count" type="xs:int" />
+			<xs:element name="point_count" type="xs:float" />
+			<xs:element name="time_to_answer" type="xs:nonNegativeInteger" default="10" />
+			<xs:element ref="testsynopsislinkArray" />
+			<xs:element ref="testsectionArray" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="testsectionArray" type="testsectionArray_type" />
+	<xs:complexType name="testsectionArray_type">
+		<xs:sequence>
+			<xs:element ref="testsection" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="testsection" type="testsection_type" />
+	<xs:complexType name="testsection_type">
+		<xs:sequence>
+			<xs:element ref="id_testsection" />
+			<xs:element name="id_section_ref" type="id_section_full_type"/>
+			<xs:element name="name" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="description" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="seq" type="xs:int" />
+			<xs:element name="published" type="xs:boolean" default="true" />
+			<xs:element name="report_subject" type="xs:string" minOccurs="0" />
+			<xs:element name="time_to_answer" type="xs:nonNegativeInteger" default="10" />
+			<xs:element name="points_per_question" type="xs:float" />
+			<xs:element name="negative_points_per_question" type="xs:float" />
+			<xs:element name="unanswered_points_per_question" type="xs:float" />
+			<xs:element name="question_start_index" type="xs:int" />
+			<xs:element name="distributed_scoring" type="xs:boolean" default="true" />
+			<xs:element name="question_count" type="xs:int" />
+			<xs:element name="point_count" type="xs:float" />
+			<xs:element name="instructions_name" type="base_shorttext_type" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<xs:element name="testsynopsislinkArray" type="testsynopsislinkArray_type" />
+	<xs:complexType name="testsynopsislinkArray_type">
+		<xs:sequence>
+			<xs:element ref="testsynopsislink" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="testsynopsislink" type="testsynopsislink_type" />
+	<xs:complexType name="testsynopsislink_type">
+		<xs:sequence>
+			<xs:element ref="id_testsynopsislink" />
+			<xs:element name="id_synopsis_link_ref" type="id_artifact_type"/>
+			<xs:element name="name" type="base_shorttext_type" />
+			<xs:element name="description" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="link" type="base_doublelongtext_type" />
+			<xs:element name="link_type" type="synopsislinktype_type" minOccurs="0" />
+			<xs:element name="seq" type="xs:int" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	
+
+	<!-- test_type -->
+	<xs:element name="synopsislinktype" type="synopsislinktype_type" default="SYNOPSIS_TEXT"/>
+	<xs:simpleType name="synopsislinktype_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SECTION" />
+			<xs:enumeration value="SYNOPSIS_TEXT" />
+			<xs:enumeration value="SYNOPSIS_VIDEO" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- test_type -->
+	<xs:element name="testtype" type="testtype_type" default="All"/>
+	<xs:simpleType name="testtype_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Test" />
+			<xs:enumeration value="Assignment" />
+			<xs:enumeration value="Challenge" />
+			<xs:enumeration value="Quiz" />
+			<xs:enumeration value="All" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- test_access_level_type -->
+	<xs:element name="test_access_level" type="test_access_level_type" />
+	<xs:simpleType name="test_access_level_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Private" />
+			<xs:enumeration value="Organization" />
+			<xs:enumeration value="Public" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- examtrack_type -->
+	<xs:element name="examtrack" type="examtrack_type" />
+	<xs:simpleType name="examtrack_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="BankClerk" />
+			<xs:enumeration value="BankPO" />
+			<xs:enumeration value="BITSATEngineering" />
+			<xs:enumeration value="CAT" />
+			<xs:enumeration value="CPT" />
+			<xs:enumeration value="EAMCETEngineering" />
+			<xs:enumeration value="EAMCETMedical" />
+			<xs:enumeration value="IITEngineering" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	
+	
+</xs:schema> 

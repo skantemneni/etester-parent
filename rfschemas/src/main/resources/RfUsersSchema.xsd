@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://www.rulefree.com/RfLoadUsersSchema" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+	xmlns:inc="http://www.w3.org/2004/08/xop/include"
+   	targetNamespace="http://www.rulefree.com/RfLoadUsersSchema"
+	elementFormDefault="qualified">
+
+	<xs:element name="redumptionCodesRequestArray" type="redumptionCodesRequestArray_type" />
+	<xs:complexType name="redumptionCodesRequestArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of redumption Code Requests</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="redumptionCodeRequest" minOccurs="0" maxOccurs="300"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="redumptionCodeRequest" type="redumptionCodeRequest_type" />
+
+	<xs:complexType name="redumptionCodeRequest_type">
+		<xs:sequence>
+			<xs:element ref="email_address" />
+			<xs:element name="first_name" type="base_name_type" minOccurs="1" />
+			<xs:element name="last_name" type="base_name_type" minOccurs="1" />
+			<xs:element name="middle_name" type="base_name_type" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+
+	<xs:element name="userArray" type="userArray_type" />
+	<xs:complexType name="userArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Users</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="user" minOccurs="0" maxOccurs="9999"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="user" type="user_type" />
+	<xs:complexType name="user_type">
+		<xs:sequence>
+			<xs:element ref="username" minOccurs="1" />
+			<xs:element ref="email_address" minOccurs="1" />
+			<xs:element ref="password" minOccurs="1" />
+			<xs:element name="enabled" type="xs:boolean" minOccurs="0" default="true" />
+			<xs:element name="first_name" type="base_name_type" minOccurs="1" />
+			<xs:element name="last_name" type="base_name_type" minOccurs="1" />
+			<xs:element name="middle_name" type="base_name_type" minOccurs="0" />
+			<xs:element name="gender" type="user_gender_kind" default="N" minOccurs="1" />
+			<xs:element name="profession" type="profession_kind" minOccurs="0" />
+			<xs:element name="institution" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="branch" type="student_branch_type" minOccurs="0" />
+			<xs:element name="year" type="student_year_type" minOccurs="0" />
+			<xs:element name="address_line1" type="base_shorttext_type" minOccurs="1" />
+			<xs:element name="address_line2" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="country" type="country_kind" minOccurs="0" />
+			<xs:element name="phone_number" type="phone_type" minOccurs="1" />
+			<xs:element name="date_of_birth" type="xs:date" minOccurs="1" />
+			<xs:element name="source_channel" type="source_channel" default="Sales" minOccurs="1" />
+			<xs:element ref="roles" minOccurs="0" />
+			<xs:element ref="subscriptions" minOccurs="0" />
+			<xs:element ref="exams" minOccurs="0" />
+			<xs:element ref="organizations" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="roles" type="roles_type" />
+	<xs:complexType name="roles_type">
+		<xs:sequence>
+			<xs:element name="user" type="xs:boolean" minOccurs="0" default="true" />
+			<xs:element name="student" type="xs:boolean" minOccurs="0" default="true" />
+			<xs:element name="teacher" type="xs:boolean" minOccurs="0" default="false" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="organizations" type="organizations_type" />
+	<xs:complexType name="organizations_type">
+		<xs:sequence>
+			<xs:element ref="id_organization" minOccurs="0" maxOccurs="999"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Artifically restricting id_organization to between 500000 and 599999 - for no goddam reason -->
+	<xs:element name="id_organization" type="id_organization_type" />
+	<xs:simpleType name="id_organization_type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="500000" />
+			<xs:maxInclusive value="599999" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="exams" type="exams_type" />
+	<xs:complexType name="exams_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Exams</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="exam" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="exam" type="exam_type" />
+	<xs:complexType name="exam_type">
+		<xs:sequence>
+			<xs:element ref="id_exam" />
+			<xs:element name="exam_date" type="start_date_type" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Artifically restricting Exams so they do not include any (non-renamed exams). non-renamed exams start with 9xxxxxxxxxxxx -->
+	<xs:element name="id_exam" type="id_exam_type" />
+	<xs:simpleType name="id_exam_type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="9000000000000" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="subscriptions" type="subscriptions_type" />
+	<xs:complexType name="subscriptions_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Channel Subscriptions</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="subscription" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="subscription" type="subscription_type" />
+	<xs:complexType name="subscription_type">
+		<xs:sequence>
+			<xs:element ref="id_channel" />
+			<xs:element ref="duration" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="duration" type="duration_Type" />
+	<xs:complexType name="duration_Type">
+		<xs:choice>
+			<xs:element ref="exact_enddate" />
+			<xs:element ref="exact_duration" />
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:element name="exact_enddate" type="exact_enddate_type" />
+	<xs:complexType name="exact_enddate_type">
+		<xs:sequence>
+			<xs:element ref="start_date" minOccurs="0"/>
+			<xs:element ref="end_date" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="exact_duration" type="exact_duration_type" />
+	<xs:complexType name="exact_duration_type">
+		<xs:sequence>
+			<xs:element ref="start_date" minOccurs="0"/>
+			<xs:element name="period" type="xs:duration" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Using "maxInclusive" to restrict the date -->
+	<xs:simpleType name="end_date_type">
+		<xs:restriction base="xs:date">
+			<xs:maxInclusive value="2020-12-31"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="end_date" type="end_date_type" />
+
+	<!-- Using "minInclusive" and "maxInclusive"-->
+	<xs:simpleType name="start_date_type">
+		<xs:restriction base="xs:date">
+			<xs:minInclusive value="2014-01-01"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="start_date" type="start_date_type" />
+
+
+
+	<!-- Other restrictions -->
+	<xs:element name="username" type="base_username_type" />
+	<xs:simpleType name="base_username_type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="50" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="email_address" type="email_address_type" />
+	<xs:simpleType name="email_address_type">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="50"/>
+			<xs:pattern value="[_\-a-zA-Z0-9\.\+]+@[a-zA-Z0-9](\.?[\-a-zA-Z0-9]*[a-zA-Z0-9])*"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="password" type="password_type" />
+	<xs:simpleType name="password_type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="base_name_type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="45" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="student_branch_type">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[F|f]oundation" /> 
+			<xs:pattern value="[E|e]ngineering" /> 
+			<xs:pattern value="[M|m]edical" /> 
+			<xs:pattern value="[C|c]ommerce" /> 
+			<xs:pattern value="[V|v]ocational" /> 
+			<xs:pattern value="[O|o]ther"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="student_year_type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="2014" />
+			<xs:maxInclusive value="2020" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="profession_kind">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[S|s]tudent" /> 
+			<xs:pattern value="[T|t]eacher"/>
+			<xs:pattern value="[O|o]ther"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="country_kind">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[I|i][N|n][D|d][I|i][A|a]" /> 
+			<xs:pattern value="[U|u][S|s][A|a]"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="user_gender_kind">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[M|m]"/>
+			<xs:pattern value="[F|f]"/>
+			<xs:pattern value="[N|n]"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="phone_type">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{10}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="source_channel">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Sales" />
+			<xs:enumeration value="Social Media" />
+			<xs:enumeration value="My Teacher" />
+			<xs:enumeration value="Another Student" />
+			<xs:enumeration value="A Friend" />
+			<xs:enumeration value="SMS Message" />
+			<xs:enumeration value="Newspaper Ad" />
+			<xs:enumeration value="Banner" />
+			<xs:enumeration value="TV Ad" />
+			<xs:enumeration value="Other" />
+		</xs:restriction>
+	</xs:simpleType>
+
+
+
+
+
+	<xs:simpleType name="base_shorttext_type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="100" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- id_system/id_channel is required, mandatory and value restricted for RF. -->
+	<xs:simpleType name="id_system_type">
+		<xs:restriction base="xs:integer">
+			<!-- Core levels -->
+			<xs:enumeration value="101" />
+			<xs:enumeration value="102" />
+			<xs:enumeration value="103" />
+			<xs:enumeration value="111" />
+			<xs:enumeration value="112" />
+			<xs:enumeration value="113" />
+			<xs:enumeration value="114" />
+			<xs:enumeration value="115" />
+
+			<!-- Bank Exam levels -->
+			<xs:enumeration value="121" />
+			<xs:enumeration value="122" />
+			<xs:enumeration value="123" />
+			<xs:enumeration value="124" />
+
+			<!-- Intermediate 10+2 levels -->
+			<xs:enumeration value="131" />
+			<xs:enumeration value="132" />
+			<xs:enumeration value="133" />
+			<xs:enumeration value="134" />
+			<xs:enumeration value="135" />
+			<xs:enumeration value="136" />
+			
+			<!-- Foundation Levels -->
+			<xs:enumeration value="104" />
+			<xs:enumeration value="105" />
+			<xs:enumeration value="141" />
+			<xs:enumeration value="145" />
+			<xs:enumeration value="146" />
+			<xs:enumeration value="147" />
+			<xs:enumeration value="148" />
+			<xs:enumeration value="149" />
+			
+			<!-- Experimental Level -->
+			<xs:enumeration value="901" />
+			<xs:enumeration value="902" />
+			<xs:enumeration value="903" />
+			
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="id_system" type="id_system_type" />
+	<xs:element name="id_channel" type="id_system_type" />
+
+
+</xs:schema>

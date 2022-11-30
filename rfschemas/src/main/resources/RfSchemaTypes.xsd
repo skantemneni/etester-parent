@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://www.rulefree.com/RfLoadDataSchema" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+	xmlns:inc="http://www.w3.org/2004/08/xop/include"
+   	targetNamespace="http://www.rulefree.com/RfLoadDataSchema"
+	elementFormDefault="qualified">
+
+	<!-- definition of attributes -->
+	<xs:attribute name="reload" type="xs:boolean" default="false" />
+
+	<!-- systemid is required, mandatory and value restricted for RF. -->
+	<xs:simpleType name="id_system_type">
+		<xs:restriction base="xs:integer">
+			<!-- Core Systems -->
+			<xs:enumeration value="101" />
+			<xs:enumeration value="102" />
+			<xs:enumeration value="103" />
+			<xs:enumeration value="111" />
+			<xs:enumeration value="112" />
+			<xs:enumeration value="113" />
+			<xs:enumeration value="114" />
+			<xs:enumeration value="115" />
+			<xs:enumeration value="116" />
+
+			<!-- Bank Exam levels -->
+			<xs:enumeration value="121" />
+			<xs:enumeration value="122" />
+			<xs:enumeration value="123" />
+			<xs:enumeration value="124" />
+
+			<!-- Intermediate 10+2 levels -->
+			<xs:enumeration value="131" />
+			<xs:enumeration value="132" />
+			<xs:enumeration value="133" />
+			<xs:enumeration value="134" />
+			<xs:enumeration value="135" />
+			<xs:enumeration value="136" />
+			
+			<!-- Foundation Levels -->
+			<xs:enumeration value="104" />
+			<xs:enumeration value="105" />
+			<xs:enumeration value="141" />
+			<xs:enumeration value="145" />
+			<xs:enumeration value="146" />
+			<xs:enumeration value="147" />
+			<xs:enumeration value="148" />
+			<xs:enumeration value="149" />
+			
+			<!-- Experimental Level -->
+			<xs:enumeration value="901" />
+			<xs:enumeration value="902" />
+			<xs:enumeration value="903" />
+			
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="id_system" type="id_system_type" />
+	<xs:element name="id_channel" type="id_system_type" />
+
+	<!-- id_provider can be any positive number. Represents a teacher/knowledge 
+		provider (as opposed to student or knowledge seeker) -->
+	<xs:simpleType name="id_provider_type">
+		<xs:restriction base="xs:nonNegativeInteger" />
+	</xs:simpleType>
+	<xs:element name="id_provider" type="id_provider_type" />
+
+	<!-- id_grade can be any positive number between 1 and 99 representing 
+		the fact that each skill can be applicable to upto 99 grades. Will 
+		be used to generate alternate hierarchy of level hierarchy's. -->
+	<xs:simpleType name="grade_kind">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Kindergarten" />
+			<xs:enumeration value="I" />
+			<xs:enumeration value="II" />
+			<xs:enumeration value="III" />
+			<xs:enumeration value="IV" />
+			<xs:enumeration value="V" />
+			<xs:enumeration value="VI" />
+			<xs:enumeration value="VII" />
+			<xs:enumeration value="VIII" />
+			<xs:enumeration value="IX" />
+			<xs:enumeration value="X" />
+			<xs:enumeration value="XI" />
+			<xs:enumeration value="XII" />
+			<xs:enumeration value="College" />
+			<xs:enumeration value="Professional" />
+			<xs:enumeration value="Vocational" />
+			<xs:enumeration value="Casual" />
+			<xs:enumeration value="Hobby" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- id_question can be any positive number between 1 and 99 representing 
+		the fact that each section can have upto 99 questions. Will be prepended 
+		with the database id_section to generate the database question 
+		id. -->
+	<xs:simpleType name="id_section_full_type">
+		<xs:restriction base="xs:positiveInteger">
+			<xs:pattern value="\d{15}"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- id_question can be any positive number between 1 and 99 representing 
+		the fact that each section can have upto 99 questions. Will be prepended 
+		with the database id_section to generate the database question 
+		id. -->
+	<xs:simpleType name="id_question_type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="99" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="id_question" type="id_question_type" />
+
+	<!-- id_question can be any positive number between 1 and 99 representing 
+		the fact that each section can have upto 99 questions. Will be prepended 
+		with the database id_section to generate the database question 
+		id. -->
+	<xs:simpleType name="id_question_full_type">
+		<xs:restriction base="xs:positiveInteger">
+			<xs:pattern value="\d{17}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="id_question_full" type="id_question_full_type" />
+
+	<!-- id_answer can be any positive number between 1 and 9 representing 
+		the fact that each question can have upto 9 answer choices. Will 
+		be prepended with the database id_question to generate the database 
+		answer id. -->
+	<xs:simpleType name="id_answer_type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="9" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="id_answer" type="id_answer_type" />
+
+	<xs:simpleType name="base_username_type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="50" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="base_shorttext_type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="100" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="base_longtext_type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="200" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="base_skillname_type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="200" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="base_skilldescription_type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="500" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="base_doublelongtext_type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="400" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType mixed="true" name="text_content_type">
+		<xs:sequence>
+			<xs:element name="line" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:simpleType name="question_kind">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MultipleChoice" />
+			<xs:enumeration value="PhraseSelector" />
+			<xs:enumeration value="RearrangeTerms" />
+			<xs:enumeration value="FillBlanks" />
+			<xs:enumeration value="FillBlanksWithPrompt" />
+			<xs:enumeration value="FillBlanksDropdown" />
+			<xs:enumeration value="WriteIn" />
+			<xs:enumeration value="PairQA" />
+			<xs:enumeration value="FractionMultipleChoice" />
+			<xs:enumeration value="PictureFractionMultipleChoice" />
+			<xs:enumeration value="VerticalArithmeticMultipleChoice" />
+			<xs:enumeration value="VerticalArithmeticFillBlanks" />
+		</xs:restriction>
+	</xs:simpleType>
+
+
+
+
+</xs:schema>

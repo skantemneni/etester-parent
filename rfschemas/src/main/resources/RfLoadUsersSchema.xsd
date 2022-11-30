@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://www.rulefree.com/RfLoadUsersSchema" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+	xmlns:inc="http://www.w3.org/2004/08/xop/include"
+   	targetNamespace="http://www.rulefree.com/RfLoadUsersSchema"
+	elementFormDefault="qualified">
+
+
+	<xs:include schemaLocation="RfUsersSchema.xsd" />
+
+
+	<!-- LoadUsers Message-->
+	<!-- LoadUsers Request-->
+	<xs:element name="LoadUsersRequest" type="LoadUsersRequest" />
+	<xs:complexType name="LoadUsersRequest">
+		<xs:sequence>
+			<xs:element ref="userArray" />
+		</xs:sequence>
+		<xs:attribute name="updateinfo" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="validateOnly" type="xs:boolean" use="optional" default="true" />
+	</xs:complexType>			
+	<!-- LoadUsers Response -->
+	<xs:element name="LoadUsersResponse">  
+		<xs:complexType>  
+			<xs:sequence>  
+				<xs:element name="status" type="xs:int" default="0"/>  
+				<xs:element name="message" type="xs:string" minOccurs="0"/>  
+			</xs:sequence>  
+		</xs:complexType>  
+	</xs:element>  
+	
+	<!-- GetUsers Message-->
+	<!-- GetUsers Request-->
+	<xs:element name="GetUsersRequest" type="GetUsersRequest" />
+	<xs:complexType name="GetUsersRequest">
+		<xs:sequence>
+			<xs:element ref="id_channel" />
+			<xs:element ref="id_organization" />
+		</xs:sequence>
+	</xs:complexType>			
+	<!-- GetUsers Response -->
+	<xs:element name="GetUsersResponse" type="GetUsersResponse" />
+	<xs:complexType name="GetUsersResponse">
+		<xs:sequence>  
+			<xs:element ref="id_channel" />
+			<xs:element ref="id_organization" />
+			<xs:element ref="userArray" />
+		</xs:sequence>  
+	</xs:complexType>  
+
+	<!-- GenerateRedumptionCodes Message-->
+	<!-- GenerateRedumptionCodes Request-->
+	<xs:element name="GenerateRedumptionCodesRequest" type="GenerateRedumptionCodesRequest" />
+	<xs:complexType name="GenerateRedumptionCodesRequest">
+		<xs:sequence>
+			<xs:element name="id_crc_type_code" type="xs:int" default="0"/>  
+			<xs:element name="purchaser_message" type="xs:string" minOccurs="0" />
+			<xs:element ref="redumptionCodesRequestArray" />
+		</xs:sequence>
+	</xs:complexType>			
+	<!-- GenerateRedumptionCodes Response -->
+	<xs:element name="GenerateRedumptionCodesResponse">  
+		<xs:complexType>  
+			<xs:sequence>  
+				<xs:element name="status" type="xs:int" default="0"/>  
+				<xs:element name="message" type="xs:string" minOccurs="0"/>  
+			</xs:sequence>  
+		</xs:complexType>  
+	</xs:element>  
+	
+	
+	
+</xs:schema> 

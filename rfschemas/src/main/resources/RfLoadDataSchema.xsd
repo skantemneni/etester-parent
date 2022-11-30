@@ -1,0 +1,1351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://www.rulefree.com/RfLoadDataSchema" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+	xmlns:inc="http://www.w3.org/2004/08/xop/include"
+   	targetNamespace="http://www.rulefree.com/RfLoadDataSchema"
+	elementFormDefault="qualified">
+
+
+	<xs:include schemaLocation="./RfSchemaTypes.xsd" />
+	<xs:include schemaLocation="./RfTestsTypes.xsd" />
+
+	<!-- SaveTests Message-->
+	<!-- SaveTests Request-->
+	<xs:element name="SaveTestsRequest" type="SaveTestsRequest" />
+	<xs:complexType name="SaveTestsRequest">
+		<xs:sequence>
+			<xs:element name="provider_name_override" type="base_username_type" minOccurs="0"/>
+			<xs:element ref="testArray" />
+		</xs:sequence>
+		<xs:attribute name="reload" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="validateOnly" type="xs:boolean" use="optional" default="true" />
+	</xs:complexType>			
+	<!-- SaveTests Response -->
+	<xs:element name="SaveTestsResponse">  
+		<xs:complexType>  
+			<xs:sequence>  
+				<xs:element name="status" type="xs:int" default="0"/>  
+				<xs:element name="message" type="xs:string" minOccurs="0"/>  
+			</xs:sequence>  
+		</xs:complexType>  
+	</xs:element>  
+	
+	<!-- GetTests Request-->
+	<xs:element name="GetTestsRequest" type="GetTestsRequest" />
+	<xs:complexType name="GetTestsRequest">
+		<xs:sequence>
+			<xs:element ref="testRequestChoice"/>
+		</xs:sequence>
+	</xs:complexType>			
+	<!-- GetTests Response -->
+	<xs:element name="GetTestsResponse" type="GetTestsResponse" />
+	<xs:complexType name="GetTestsResponse">
+		<xs:sequence>  
+			<xs:element ref="testArray" />
+		</xs:sequence>  
+	</xs:complexType>  
+
+	
+	<!-- LoadInstructions Message-->
+	<!-- LoadInstructions Request-->
+	<xs:element name="LoadInstructionsRequest" type="LoadInstructionsRequest" />
+	<xs:complexType name="LoadInstructionsRequest">
+		<xs:sequence>
+			<xs:element ref="id_system" />
+			<xs:element name="instructions_name" type="base_shorttext_type" />
+			<xs:element name="description" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="text" type="xs:string" minOccurs="0" />
+			<xs:element name="addl_info" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+		<xs:attribute name="reload" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="validateOnly" type="xs:boolean" use="optional" default="true" />
+	</xs:complexType>			
+	<!-- LoadInstructions Response -->
+	<xs:element name="LoadInstructionsResponse">  
+		<xs:complexType>  
+			<xs:sequence>  
+				<xs:element name="status" type="xs:int" default="0"/>  
+				<xs:element name="message" type="xs:string" minOccurs="0"/>  
+			</xs:sequence>  
+		</xs:complexType>  
+	</xs:element>  
+	<!-- GetInstructions Request-->
+	<xs:element name="GetInstructionsRequest" type="GetInstructionsRequest" />
+	<xs:complexType name="GetInstructionsRequest">
+		<xs:sequence>
+			<xs:element name="instructions_name" type="base_shorttext_type" />
+		</xs:sequence>
+	</xs:complexType>			
+	<!-- GetInstructions Response -->
+	<xs:element name="GetInstructionsResponse" type="GetInstructionsResponse" />
+	<xs:complexType name="GetInstructionsResponse">
+		<xs:sequence>  
+			<xs:element name="instructions_name" type="base_shorttext_type" />
+			<xs:element name="description" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="text" type="xs:string" minOccurs="0" />
+			<xs:element name="addl_info" type="xs:string" minOccurs="0" />
+		</xs:sequence>  
+	</xs:complexType>  
+
+	
+	<!-- LoadSections Message-->
+	<!-- LoadSections Request-->
+	<xs:element name="LoadSectionsRequest" type="LoadSectionsRequest" />
+	<xs:complexType name="LoadSectionsRequest">
+		<xs:sequence>
+			<xs:element ref="id_system" />
+			<xs:element ref="id_level" />
+			<xs:element ref="id_topic" />
+			<xs:element ref="id_skill" />
+			<xs:element ref="id_provider" minOccurs="0"/>
+			<xs:element ref="sectionArray" />
+		</xs:sequence>
+		<xs:attribute name="reload" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="validateOnly" type="xs:boolean" use="optional" default="true" />
+	</xs:complexType>			
+	<!-- LoadSections Response -->
+	<xs:element name="LoadSectionsResponse">  
+		<xs:complexType>  
+			<xs:sequence>  
+				<xs:element name="status" type="xs:int" default="0"/>  
+				<xs:element name="message" type="xs:string" minOccurs="0"/>  
+			</xs:sequence>  
+		</xs:complexType>  
+	</xs:element>  
+	
+	
+	<!-- GetSections Request-->
+	<xs:element name="GetSectionsRequest" type="GetSectionsRequest" />
+	<xs:complexType name="GetSectionsRequest">
+		<xs:sequence>
+			<xs:element ref="id_system" />
+			<xs:element ref="id_level" />
+			<xs:element ref="id_topic" />
+			<xs:element ref="id_skill" />
+			<xs:element ref="id_section" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>			
+	<!-- GetSections Response -->
+	<xs:element name="GetSectionsResponse" type="GetSectionsResponse" />
+	<xs:complexType name="GetSectionsResponse">
+		<xs:sequence>  
+			<xs:element ref="id_system" />
+			<xs:element ref="id_level" />
+			<xs:element ref="id_topic" />
+			<xs:element ref="id_skill" />
+			<xs:element ref="sectionArray" />
+		</xs:sequence>  
+	</xs:complexType>  
+
+	
+	
+	
+	<!-- LoadSkills Message-->
+	<!-- LoadSkills Request-->
+	<xs:element name="LoadSkillsRequest" type="LoadSkillsRequest" />
+	<xs:complexType name="LoadSkillsRequest">
+		<xs:sequence>
+			<xs:element ref="id_system" />
+			<xs:element ref="id_level" />
+			<xs:element ref="id_topic" />
+			<xs:element ref="id_provider" minOccurs="1"/>
+			<xs:element ref="skillArray" />
+		</xs:sequence>
+		<xs:attribute name="reload" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="validateOnly" type="xs:boolean" use="optional" default="true" />
+	</xs:complexType>			
+	<!-- LoadSkills Response -->
+	<xs:element name="LoadSkillsResponse">  
+		<xs:complexType>  
+			<xs:sequence>  
+				<xs:element name="status" type="xs:int" default="0"/>  
+				<xs:element name="message" type="xs:string" minOccurs="0"/>  
+			</xs:sequence>  
+		</xs:complexType>  
+	</xs:element>  
+
+	<!-- LoadSkillsOnly Message (no sections) -->
+	<!-- LoadSkillsOnly Request-->
+	<xs:element name="LoadSkillsOnlyRequest" type="LoadSkillsOnlyRequest" />
+	<xs:complexType name="LoadSkillsOnlyRequest">
+		<xs:sequence>
+			<xs:element ref="id_system" />
+			<xs:element ref="id_level" />
+			<xs:element ref="id_topic" />
+			<xs:element ref="id_provider" minOccurs="1"/>
+			<xs:element ref="skillOnlyArray" minOccurs="0"/>
+			<xs:element ref="skillChoiceArray" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="reload" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="validateOnly" type="xs:boolean" use="optional" default="true" />
+	</xs:complexType>			
+	<!-- LoadSkills Response -->
+	<xs:element name="LoadSkillsOnlyResponse">  
+		<xs:complexType>  
+			<xs:sequence>  
+				<xs:element name="status" type="xs:int" default="0"/>  
+				<xs:element name="message" type="xs:string" minOccurs="0"/>  
+			</xs:sequence>  
+		</xs:complexType>  
+	</xs:element>  
+
+
+
+
+
+	<!-- LoadTopics Message-->
+	<!-- LoadTopics Request-->
+	<xs:element name="LoadTopicsRequest" type="LoadTopicsRequest" />
+	<xs:complexType name="LoadTopicsRequest">
+		<xs:sequence>
+			<xs:element ref="id_system" />
+			<xs:element ref="id_level" />
+			<xs:element ref="id_provider" minOccurs="1"/>
+			<xs:element ref="topicArray" />
+		</xs:sequence>
+		<xs:attribute name="reload" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="validateOnly" type="xs:boolean" use="optional" default="true" />
+	</xs:complexType>			
+	<!-- LoadTopics Response -->
+	<xs:element name="LoadTopicsResponse">  
+		<xs:complexType>  
+			<xs:sequence>  
+				<xs:element name="status" type="xs:int" default="0"/>  
+				<xs:element name="message" type="xs:string" minOccurs="0"/>  
+			</xs:sequence>  
+		</xs:complexType>  
+	</xs:element>  
+	
+	<!-- LoadTopicsOnly Message (Contains SkillsOnly not Skills)-->
+	<!-- LoadTopicsOnly Request-->
+	<xs:element name="LoadTopicsOnlyRequest" type="LoadTopicsOnlyRequest" />
+	<xs:complexType name="LoadTopicsOnlyRequest">
+		<xs:sequence>
+			<xs:element ref="id_system" />
+			<xs:element ref="id_level" />
+			<xs:element ref="id_provider" minOccurs="1"/>
+			<xs:element ref="topicOnlyArray" minOccurs="0"/>
+			<xs:element ref="topicChoiceArray" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="reload" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="validateOnly" type="xs:boolean" use="optional" default="true" />
+	</xs:complexType>			
+	<!-- LoadTopics Response -->
+	<xs:element name="LoadTopicsOnlyResponse">  
+		<xs:complexType>  
+			<xs:sequence>  
+				<xs:element name="status" type="xs:int" default="0"/>  
+				<xs:element name="message" type="xs:string" minOccurs="0"/>  
+			</xs:sequence>  
+		</xs:complexType>  
+	</xs:element>  
+	
+
+
+
+
+
+
+
+
+	<!-- LoadLevels Message-->
+	<!-- LoadLevels Request-->
+	<xs:element name="LoadLevelsRequest" type="LoadLevelsRequest" />
+	<xs:complexType name="LoadLevelsRequest">
+		<xs:sequence>
+			<xs:element ref="id_system" />
+			<xs:element ref="id_provider" minOccurs="1"/>
+			<xs:element ref="levelArray" />
+		</xs:sequence>
+		<xs:attribute name="reload" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="validateOnly" type="xs:boolean" use="optional" default="true" />
+	</xs:complexType>			
+	<!-- LoadLevels Response -->
+	<xs:element name="LoadLevelsResponse">  
+		<xs:complexType>  
+			<xs:sequence>  
+				<xs:element name="status" type="xs:int" default="0"/>  
+				<xs:element name="message" type="xs:string" minOccurs="0"/>  
+			</xs:sequence>  
+		</xs:complexType>  
+	</xs:element>  
+	
+	<!-- LoadLevelsOnly Message-->
+	<!-- LoadLevelsOnly Request-->
+	<xs:element name="LoadLevelsOnlyRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="id_system" />
+				<xs:element ref="id_provider" minOccurs="1"/>
+				<xs:element ref="levelOnlyArray" minOccurs="0"/>
+				<xs:element ref="levelChoiceArray" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="reload" type="xs:boolean" use="optional" default="false" />
+			<xs:attribute name="validateOnly" type="xs:boolean" use="optional" default="true" />
+		</xs:complexType>
+	</xs:element>  
+	
+	<!-- LoadLevels Response -->
+	<xs:element name="LoadLevelsOnlyResponse">  
+		<xs:complexType>  
+			<xs:sequence>  
+				<xs:element name="status" type="xs:int" default="0"/>  
+				<xs:element name="message" type="xs:string" minOccurs="0"/>  
+			</xs:sequence>  
+		</xs:complexType>  
+	</xs:element>  
+	
+	
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	<!-- id_level can be any positive number between 1 and 999. Will be 
+		prepended with systemid to generate the database level id. -->
+	<xs:simpleType name="id_level_type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="999" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="id_level" type="id_level_type" />
+
+	<!-- id_level_reference can be any positive number with 6 digits representing  
+		a full level id reference. -->
+	<xs:simpleType name="id_level_reference_type">
+		<xs:restriction base="xs:positiveInteger">
+			<xs:totalDigits value="6"/>
+			<xs:minInclusive value="100000"/>
+		</xs:restriction>
+	</xs:simpleType>  		    						
+	<xs:element name="id_level_reference" type="id_level_reference_type" />
+
+	<!-- id_topicheading can be any positive number between 1 and 999. 
+		Will be prepended with the database id_level to generate the database 
+		id_topic id. -->
+	<xs:simpleType name="id_topic_type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="999" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="id_topic" type="id_topic_type" />
+
+	<!-- id_topic_reference can be any positive number with 9 digits representing  
+		a full topic id reference. -->
+	<xs:simpleType name="id_topic_reference_type">
+		<xs:restriction base="xs:positiveInteger">
+			<xs:totalDigits value="9"/>
+			<xs:minInclusive value="100000000"/>
+		</xs:restriction>
+	</xs:simpleType>  		    						
+	<xs:element name="id_topic_reference" type="id_topic_reference_type" />
+	
+	<!-- id_skill can be any positive number between 1 and 99. Will be 
+		prepended with the database id_topic to generate the database 
+		skill id. -->
+	<xs:simpleType name="id_skill_type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="99" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="id_skill" type="id_skill_type" />
+
+	<!-- id_skill_reference can be any positive number with 11 digits representing  
+		a full skill id reference. -->
+	<xs:simpleType name="id_skill_reference_type">
+		<xs:restriction base="xs:positiveInteger">
+			<xs:totalDigits value="11"/>
+			<xs:minInclusive value="10000000000"/>
+			<!-- <xs:pattern value="^([1][9]\d\d|[2]\d\d\d)$"/> -->
+		</xs:restriction>
+	</xs:simpleType>  		    						
+	<xs:element name="id_skill_reference" type="id_skill_reference_type" />
+	
+	<!-- id_section can be any positive number between 1 and 999 representing 
+		the fact that each skill can have upto 999 question sections. Will 
+		be prepended with the database id_skill to generate the database section 
+		id. -->
+	<xs:simpleType name="id_section_type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="9999" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="id_section" type="id_section_type" />
+
+	<!-- id_grade can be any positive number between 1 and 99 representing 
+		the fact that each skill can be applicable to upto 99 grades. Will 
+		be used to generate alternate hierarchy of level hierarchy's. -->
+	<xs:simpleType name="subject_kind">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="English" />
+			<xs:enumeration value="Math" />
+			<xs:enumeration value="Science" />
+			<xs:enumeration value="Social" />
+			<xs:enumeration value="Physics" />
+			<xs:enumeration value="Chemistry" />
+			<xs:enumeration value="Biology" />
+			<xs:enumeration value="MentalAbility" />
+			<xs:enumeration value="GeneralKnowledge" />
+			<xs:enumeration value="BankingPO" />
+			<xs:enumeration value="BankingClerk" />
+			<xs:enumeration value="CAT" />
+			<xs:enumeration value="CPT" />
+			<xs:enumeration value="RRB" />
+			<xs:enumeration value="GATEEngineering" />
+			<xs:enumeration value="InterPhysics" />
+			<xs:enumeration value="InterChemistry" />
+			<xs:enumeration value="InterBotany" />
+			<xs:enumeration value="InterZoology" />
+			<xs:enumeration value="InterMath" />
+			<xs:enumeration value="InterEnglish" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- base data types with restrictions to protect the database -->
+	<xs:simpleType name="base_headline_type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="45" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="section_category_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="general" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="section_subject_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="general" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Here are the complex types for the data load system .... -->
+
+	<!-- Here are the Level Choice, Core and Reference Complex types for the data load system .... -->
+	<xs:element name="levelChoiceArray" type="levelChoiceArray_type" />
+	<xs:complexType name="levelChoiceArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Level Choice Elements - Core and References</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="levelChoiceType" minOccurs="0" maxOccurs="999"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="levelChoiceType" type="levelChoice_Type" />
+	<xs:complexType name="levelChoice_Type">
+		<xs:choice>
+			<xs:element ref="levelOnly" />
+			<xs:element ref="coreLevelReference" />
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:element name="coreLevelReference" type="coreLevelReference_type" />
+	<xs:complexType name="coreLevelReference_type">
+		<xs:sequence>
+			<xs:element ref="id_level" minOccurs="0" />
+			<xs:element ref="id_level_reference" />
+			<xs:element name="subject_override" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="subject_header_override" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="name_override" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="description_override" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="published" type="xs:boolean" minOccurs="0" default="false" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Here are the Level Complex types for the data load system .... -->
+	<xs:complexType name="levelOnly_type">
+		<xs:sequence>
+			<xs:element ref="id_level" minOccurs="0"/>
+			<xs:element name="subject" type="subject_kind" minOccurs="1" />
+			<xs:element name="subject_header" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="name" type="base_shorttext_type" />
+			<xs:element name="display_name" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="description" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="text" type="xs:string" minOccurs="0" />
+			<xs:element name="addl_info" type="xs:string" minOccurs="0" />
+			<xs:element name="published" type="xs:boolean" minOccurs="0" default="false" />
+			<xs:element name="derived" type="xs:boolean" minOccurs="0" default="false" />
+			<xs:element ref="topicOnlyArray" minOccurs="0"/>
+			<xs:element ref="topicChoiceArray" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="levelOnly" type="levelOnly_type" />
+
+	<xs:complexType name="levelOnlyArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Levels Only  - Contains Levels with TopicsOnly. Not Levels with Topics That have Skills That have Sections</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="levelOnly" minOccurs="0" maxOccurs="999"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="levelOnlyArray" type="levelOnlyArray_type" />
+
+	<xs:complexType name="level_type">
+		<xs:sequence>
+			<xs:element ref="id_level" />
+			<xs:element name="subject" type="subject_kind" minOccurs="1" />
+			<xs:element name="subject_header" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="name" type="base_shorttext_type" />
+			<xs:element name="display_name" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="description" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="text" type="xs:string" minOccurs="0" />
+			<xs:element name="addl_info" type="xs:string" minOccurs="0" />
+			<xs:element name="published" type="xs:boolean" minOccurs="0" default="false" />
+			<xs:element name="derived" type="xs:boolean" minOccurs="0" default="false" />
+			<xs:element ref="topicArray" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="reload" type="xs:boolean" use="optional" default="false" />
+	</xs:complexType>
+	<xs:element name="level" type="level_type" />
+
+	<xs:complexType name="levelArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Levels</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="level" minOccurs="0" maxOccurs="999"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="levelArray" type="levelArray_type" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- Here are the Topic Choice, Core and Reference Complex types for the data load system .... -->
+	<xs:element name="topicChoiceArray" type="topicChoiceArray_type" />
+	<xs:complexType name="topicChoiceArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Topic Choice Elements - Core and References</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="topicChoiceType" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="topicChoiceType" type="topicChoice_Type" />
+	<xs:complexType name="topicChoice_Type">
+		<xs:choice>
+			<xs:element ref="topicOnly" />
+			<xs:element ref="coreTopicReference" />
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:element name="coreTopicReference" type="coreTopicReference_type" />
+	<xs:complexType name="coreTopicReference_type">
+		<xs:sequence>
+			<xs:element ref="id_topic" minOccurs="0" />
+			<xs:element ref="id_topic_reference" />
+			<xs:element name="subject_override" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="name_override" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="description_override" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="published" type="xs:boolean" minOccurs="0" default="false" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Here are the Topic Complex types for the data load system .... -->
+	<xs:complexType name="topicOnly_type">
+		<xs:sequence>
+			<xs:element ref="id_topic" minOccurs="0" />
+			<xs:element name="subject" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="name" type="base_shorttext_type" />
+			<xs:element name="display_name" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="description" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="text" type="xs:string" minOccurs="0" />
+			<xs:element name="addl_info" type="xs:string" minOccurs="0" />
+			<xs:element name="published" type="xs:boolean" minOccurs="0" default="false" />
+			<xs:element name="derived" type="xs:boolean" minOccurs="0" default="false" />
+			<xs:element ref="skillOnlyArray" minOccurs="0"/>
+			<xs:element ref="skillChoiceArray" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="topicOnly" type="topicOnly_type" />
+
+	<xs:complexType name="topicOnlyArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Topics Only - Contains SkillsOnly. Not skills with sections</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="topicOnly" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="topicOnlyArray" type="topicOnlyArray_type" />
+
+	<xs:complexType name="topic_type">
+		<xs:sequence>
+			<xs:element ref="id_topic" />
+			<xs:element name="subject" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="name" type="base_shorttext_type" />
+			<xs:element name="display_name" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="description" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="text" type="xs:string" minOccurs="0" />
+			<xs:element name="addl_info" type="xs:string" minOccurs="0" />
+			<xs:element name="published" type="xs:boolean" minOccurs="0" default="false" />
+			<xs:element name="derived" type="xs:boolean" minOccurs="0" default="false" />
+			<xs:element ref="skillArray" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="reload" type="xs:boolean" use="optional" default="false" />
+	</xs:complexType>
+	<xs:element name="topic" type="topic_type" />
+
+	<xs:complexType name="topicArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Topics</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="topic" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="topicArray" type="topicArray_type" />
+
+	<!-- Here are the Skill Choice, Core and Reference Complex types for the data load system .... -->
+	<xs:element name="skillChoiceArray" type="skillChoiceArray_type" />
+	<xs:complexType name="skillChoiceArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Skills Choice Elements - Core and References</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="skillChoiceType" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="skillChoiceType" type="skillChoice_Type" />
+	<xs:complexType name="skillChoice_Type">
+		<xs:choice>
+			<xs:element ref="skillOnly" />
+			<xs:element ref="coreSkillReference" />
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:element name="coreSkillReference" type="coreSkillReference_type" />
+	<xs:complexType name="coreSkillReference_type">
+		<xs:sequence>
+			<xs:element ref="id_skill" minOccurs="0" />
+			<xs:element ref="id_skill_reference" />
+			<xs:element name="name_override" type="base_skillname_type" minOccurs="0" />
+			<xs:element name="description_override" type="base_skilldescription_type" minOccurs="0" />
+			<xs:element name="published" type="xs:boolean" minOccurs="0" default="false" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Here are the Skill Complex types for the data load system .... -->
+	<xs:element name="skillOnly" type="skillOnly_type" />
+	<xs:complexType name="skillOnly_type">
+		<xs:sequence>
+			<xs:element ref="id_skill"  minOccurs="0" />
+			<xs:element name="subject" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="name" type="base_skillname_type" />
+			<xs:element name="display_name" type="base_skillname_type" minOccurs="0" />
+			<xs:element name="description" type="base_skilldescription_type" minOccurs="0" />
+			<xs:element name="text" type="xs:string" minOccurs="0" />
+			<xs:element name="addl_info" type="xs:string" minOccurs="0" />
+			<xs:element name="published" type="xs:boolean" minOccurs="0" default="false" />
+			<xs:element ref="gradeArray" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="skillOnlyArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Skills Only - No sections in Skills</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="skillOnly" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="skillOnlyArray" type="skillOnlyArray_type" />
+	
+	<xs:complexType name="skill_type">
+		<xs:sequence>
+			<xs:element ref="id_skill" />
+			<xs:element name="subject" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="name" type="base_skillname_type" />
+			<xs:element name="display_name" type="base_skillname_type" minOccurs="0" />
+			<xs:element name="description" type="base_skilldescription_type" minOccurs="0" />
+			<xs:element name="text" type="xs:string" minOccurs="0" />
+			<xs:element name="addl_info" type="xs:string" minOccurs="0" />
+			<xs:element name="published" type="xs:boolean" minOccurs="0" default="false" />
+			<xs:element ref="sectionArray" minOccurs="0"/>
+			<xs:element ref="gradeArray" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="reload" type="xs:boolean" use="optional" default="false" />
+	</xs:complexType>
+	<xs:element name="skill" type="skill_type" />
+
+	<xs:complexType name="skillArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Skills</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="skill" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="skillArray" type="skillArray_type" />
+
+
+
+<!-- Sesi -->
+	<!-- answer compare_type -->
+	<xs:complexType name="compare_criteria_type">
+		<xs:choice>
+			<xs:element ref="integer_compare" />
+			<xs:element ref="decimal_compare" />
+			<xs:element ref="text_compare" />
+		</xs:choice>
+	</xs:complexType>
+	<xs:element name="compare_criteria" type="compare_criteria_type" />
+
+<!-- 
+	<xs:simpleType name="integer_compare_type">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="integer"/>
+    	</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="integer_compare" type="integer_compare_type" default="integer" />
+ -->
+	<xs:complexType name="integer_compare_type">
+		<xs:sequence>
+			<xs:element name="integer" default="true" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:boolean">
+						<xs:pattern value="true"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="integer_compare" type="integer_compare_type" />
+
+	<xs:complexType name="decimal_compare_type">
+		<xs:sequence>
+			<xs:element name="precision_digits" default="2" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="6"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="decimal_compare" type="decimal_compare_type" />
+
+	<xs:complexType name="text_compare_type">
+		<xs:sequence>
+			<xs:element name="case_sensitive" type="xs:boolean" default="false" minOccurs="0" />
+			<xs:element name="trim_outer_spaces" type="xs:boolean" default="true" minOccurs="0" />
+			<xs:element name="trim_extra_inner_spaces" type="xs:boolean" default="true" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="text_compare" type="text_compare_type" />
+
+	
+	<xs:complexType name="answer_type">
+		<xs:sequence>
+			<xs:element ref="id_answer" minOccurs="0"/>
+			<xs:element name="seq" type="xs:positiveInteger" minOccurs="0" default="1" />
+			<xs:element name="text" type="xs:string" />
+			<xs:element name="addl_info" type="xs:string" minOccurs="0" />
+			<xs:element ref="compare_criteria" minOccurs="0" />
+		</xs:sequence>
+		<xs:attribute name="correct" type="xs:boolean" use="optional" default="false" />
+	</xs:complexType>
+	<xs:element name="answer" type="answer_type" />
+
+	<xs:complexType name="answerArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of answers in a question</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="answer" type="answer_type" minOccurs="0" maxOccurs="9"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="answerArray" type="answerArray_type" />
+
+
+
+
+
+	<xs:complexType name="question_type">
+		<xs:sequence>
+			<xs:element ref="id_question" minOccurs="0"/>
+			<xs:element name="name" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="description" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="text_precontext" type="xs:string" minOccurs="0" />
+			<xs:element name="text" type="text_content_type" />
+			<xs:element name="text_postcontext" type="xs:string" minOccurs="0" />
+			<xs:element name="addl_info" type="text_content_type" minOccurs="1" />
+			<xs:element name="banner" type="base_headline_type" minOccurs="0" />
+			<xs:element name="heading" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="instructions" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="type" type="question_kind" minOccurs="0" default="MultipleChoice" />
+			<xs:element ref="reference_info" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="answerArray" />
+		</xs:sequence>
+		<xs:attribute name="multiple_answers" type="xs:boolean" use="optional" default="false" />
+	</xs:complexType>
+	<xs:element name="question" type="question_type" />
+
+	<!-- Reference to a Topic and potentially multiple skills from the topic for a question.  Used in Mock tests -->
+	<xs:element name="reference_info" type="reference_info_type" />
+	<xs:complexType name="reference_info_type">
+		<xs:sequence>
+			<xs:element ref="skill_reference_array" minOccurs="0"/>
+			<xs:element name="id_ref_topic" type="id_topic_type" minOccurs="0"/>
+			<xs:element name="id_ref_level" type="id_level_type" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="skill_reference_array" type="skill_reference_array_type" />
+	<xs:complexType name="skill_reference_array_type">
+		<xs:sequence>
+			<xs:element name="id_ref_skill" type="id_skill_type" minOccurs="0" maxOccurs="10"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="questionArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of questions in a Section</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="question" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="questionArray" type="questionArray_type" />
+
+	<xs:complexType name="questionSet_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of questions in a Question Set</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="text" type="xs:string" minOccurs="0" />
+			<xs:element ref="question" minOccurs="1" maxOccurs="10"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="questionSet" type="questionSet_type" />
+
+	<xs:complexType name="questionChoice_Type">
+		<xs:choice>
+			<xs:element ref="question" />
+			<xs:element ref="questionSet" />
+		</xs:choice>
+	</xs:complexType>
+	<xs:element name="questionChoiceType" type="questionChoice_Type" />
+
+	<xs:complexType name="questionChoiceArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of questions in a Section</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="questionChoiceType" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="questionChoiceArray" type="questionChoiceArray_type" />
+
+	<xs:complexType name="section_type">
+		<xs:sequence>
+			<xs:element ref="id_section" minOccurs="1"/>
+			<xs:element name="name" type="base_shorttext_type" minOccurs="1" />
+			<xs:element name="description" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="text" type="xs:string" minOccurs="0" />
+			<xs:element name="addl_info" type="xs:string" minOccurs="0" />
+			<xs:element name="is_derived" type="xs:boolean" default="false" minOccurs="0" />
+			<xs:element name="time_to_answer" type="xs:nonNegativeInteger" default="0" minOccurs="0" />
+			<xs:element name="auto_generated" type="xs:boolean" default="false" minOccurs="0" />
+			<xs:element name="generator_metadata" type="xs:string" minOccurs="0" />
+			<xs:element name="question_banner" type="base_headline_type" minOccurs="0" />
+			<xs:element name="question_heading" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="question_instructions" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="is_linktext" type="xs:boolean" default="false" minOccurs="0" />
+			<xs:element name="linktext_address" type="xs:string" minOccurs="0" />
+			<xs:element name="is_practice" type="xs:boolean" default="false" minOccurs="0" />
+			<xs:element ref="questionArray" minOccurs="0"/>
+			<xs:element ref="questionChoiceArray" minOccurs="0"/>
+			<xs:element ref="derivedSectionQuestionArray" minOccurs="0"/>
+			<xs:element ref="pictureArray" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="reload" type="xs:boolean" use="optional" default="false" />
+	</xs:complexType>
+	<xs:element name="section" type="section_type" />
+
+	<xs:complexType name="sectionArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of sections</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="section" minOccurs="0" maxOccurs="9999"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="sectionArray" type="sectionArray_type" />
+
+
+
+
+	<!-- Whole lot of stuff to support downoading and uploading Derived Sections (with question references, ofcourse) -->
+	<xs:element name="derivedSectionQuestionArray" type="derivedSectionQuestionArray_type" />
+	<xs:complexType name="derivedSectionQuestionArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of derived section questions in a Section</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="derived_section_question" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="derived_section_question" type="derived_section_question_type" />
+	<xs:complexType name="derived_section_question_type">
+		<xs:sequence>
+			<xs:element ref="id_question_full"/>
+			<xs:element name="question_order" type="xs:positiveInteger" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+
+
+	<xs:complexType name="picture_type">
+		<xs:sequence>
+			<xs:element name="seq" type="xs:positiveInteger" minOccurs="0"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="image" type="xs:base64Binary" xmime:expectedContentTypes="*/*"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="picture" type="picture_type" />
+
+	<xs:complexType name="pictureArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of pictures</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="picture" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="pictureArray" type="pictureArray_type" />
+
+	<xs:complexType name="grade_type">
+		<xs:sequence>
+			<xs:element name="grade_name" type="grade_kind" minOccurs="1"/>
+			<xs:element name="alt_name" type="base_shorttext_type" minOccurs="0" />
+			<xs:element name="alt_description" type="base_longtext_type" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="grade" type="grade_type" />
+
+	<xs:complexType name="gradeArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Grades this skill is valid for</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="grade" minOccurs="0" maxOccurs="20"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="gradeArray" type="gradeArray_type" />
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--  Split this into a seperate schema  PLEASE... -->
+	
+		<!-- LoadWordlists Message-->
+	<!-- LoadWordlists Request-->
+	<xs:element name="LoadWordlistsRequest" type="LoadWordlistsRequest" />
+	<xs:complexType name="LoadWordlistsRequest">
+		<xs:sequence>
+			<xs:element ref="id_system" />
+			<xs:element ref="id_level" />
+			<xs:element ref="id_topic" />
+			<xs:element ref="id_skill" />
+			<xs:element ref="id_provider" minOccurs="0"/>
+			<xs:element ref="wordlistArray" />
+		</xs:sequence>
+		<xs:attribute name="reload" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="validateOnly" type="xs:boolean" use="optional" default="true" />
+	</xs:complexType>			
+	<!-- LoadLevels Response -->
+	<xs:element name="LoadWordlistsResponse">  
+		<xs:complexType>  
+			<xs:sequence>  
+				<xs:element name="status" type="xs:int" default="0"/>  
+				<xs:element name="message" type="xs:string" minOccurs="0"/>  
+			</xs:sequence>  
+		</xs:complexType>  
+	</xs:element>  
+
+
+	
+	<!-- id_wordlist_type can be any positive number between 1 and 999. Will be 
+		prepended with systemid to generate the database wordlist id. -->
+	<xs:simpleType name="id_wordlist_type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="999" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="id_wordlist" type="id_wordlist_type" />
+
+	<!-- id_word can be any positive number between 1 and 999. 
+		Will be prepended with the database id_wordlist_type to generate the database 
+		id_word id. -->
+	<xs:simpleType name="id_wordName_type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="999" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="id_wordName" type="id_wordName_type" />
+
+	<!-- id_passage can be any positive number between 1 and 99. 
+		Will be prepended with the database id_wordlist_type to generate the database 
+		id_passage id. -->
+	<xs:simpleType name="id_passage_type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="99" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="id_passage" type="id_passage_type" />
+
+	<!-- Here are the complex types for the data load system .... -->
+
+	<xs:complexType name="wordlist_type">
+		<xs:sequence>
+			<xs:element ref="id_wordlist" />
+			<xs:element name="name" type="base_shorttext_type" />
+			<xs:element name="description" type="base_longtext_type" minOccurs="0" />
+			<xs:element ref="wordNameArray" minOccurs="0"/>
+			<xs:element ref="passageArray" minOccurs="0"/>
+ 			<xs:element ref="questionArray" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="reload" type="xs:boolean" use="optional" default="false" />
+	</xs:complexType>
+	<xs:element name="wordlist" type="wordlist_type" />
+
+	<xs:complexType name="wordlistArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Wordlists</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="wordlist" minOccurs="0" maxOccurs="999" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="wordlistArray" type="wordlistArray_type" />
+
+
+
+
+	<!-- Here are the Topic Complex types for the data load system .... -->
+	<xs:complexType name="wordName_type">
+		<xs:sequence>
+			<xs:element ref="id_wordName" minOccurs="0" />
+			<xs:element name="wordName" type="base_shorttext_type" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="wordName" type="wordName_type" />
+
+	<xs:complexType name="wordNameArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Word List Words</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="wordName" minOccurs="0" maxOccurs="999"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="wordNameArray" type="wordNameArray_type" />
+
+	<xs:complexType name="passage_type">
+		<xs:sequence>
+			<xs:element ref="id_passage" minOccurs="0" />
+			<xs:element name="text" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="passage" type="passage_type" />
+
+	<xs:complexType name="passageArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Word List Passages</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="passage" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="passageArray" type="passageArray_type" />
+
+<!-- 	<xs:complexType name="wlquestion_type">
+		<xs:sequence>
+			<xs:element ref="id_question" minOccurs="0" />
+			<xs:element name="question_type" type="question_kind" minOccurs="0" default="MultipleChoice" />
+			<xs:element name="text" type="text_content_type" />
+			<xs:element name="addl_info" type="text_content_type" minOccurs="1" />
+			<xs:element ref="wlAnswerArray" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="wlquestion" type="wlquestion_type" />
+	
+	<xs:complexType name="wlQuestionArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Word List Questions</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="wlquestion" minOccurs="0" maxOccurs="99"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="wlQuestionArray" type="wlQuestionArray_type" />
+
+	<xs:complexType name="wlanswer_type">
+		<xs:sequence>
+			<xs:element ref="id_answer" minOccurs="0"/>
+			<xs:element name="text" type="xs:string" />
+		</xs:sequence>
+		<xs:attribute name="correct" type="xs:boolean" use="optional" default="false" />
+	</xs:complexType>
+	<xs:element name="wlanswer" type="wlanswer_type" />
+
+	<xs:complexType name="wlAnswerArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of answers in WL questions</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="wlanswer" minOccurs="0" maxOccurs="9"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="wlAnswerArray" type="wlAnswerArray_type" />
+
+  -->	
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+	
+	
+	<!-- LoadWords Message-->
+	<!-- LoadWords Request-->
+	<xs:element name="UpdateWordsRequest" type="UpdateWordsRequest" />
+	<xs:complexType name="UpdateWordsRequest">
+		<xs:sequence>
+			<xs:element ref="id_system" />
+			<xs:element ref="id_level" />
+			<xs:element ref="id_clist" />
+			<xs:element ref="id_provider" minOccurs="0"/>
+			<xs:element ref="wordArray" />
+		</xs:sequence>
+		<xs:attribute name="reload" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="validateOnly" type="xs:boolean" use="optional" default="true" />
+	</xs:complexType>			
+	<!-- LoadWords Response -->
+	<xs:element name="UpdateWordsResponse">  
+		<xs:complexType>  
+			<xs:sequence>  
+				<xs:element name="status" type="xs:int" default="0"/>  
+				<xs:element name="message" type="xs:string" minOccurs="0"/>  
+			</xs:sequence>  
+		</xs:complexType>  
+	</xs:element>  
+
+
+
+
+
+	<!-- GetWords Request-->
+	<xs:element name="GetWordsRequest" type="GetWordsRequest" />
+	<xs:complexType name="GetWordsRequest">
+		<xs:sequence>
+			<xs:element ref="id_system" />
+			<xs:element ref="id_level" />
+			<xs:element ref="id_clist" />
+		</xs:sequence>
+	</xs:complexType>			
+	<!-- GetWords Response -->
+	<xs:element name="GetWordsResponse" type="GetWordsResponse" />
+	<xs:complexType name="GetWordsResponse">
+		<xs:sequence>  
+			<xs:element ref="id_system" />
+			<xs:element ref="id_level" />
+			<xs:element ref="id_clist" />
+			<xs:element ref="wordArray" />
+		</xs:sequence>  
+	</xs:complexType>  
+
+	<xs:complexType name="wordArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Word List Words</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="word" minOccurs="0" maxOccurs="999"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="wordArray" type="wordArray_type" />
+
+	<!-- Here are the Topic Complex types for the data load system .... -->
+	<xs:complexType name="word_type">
+		<xs:sequence>
+			<xs:element ref="id_word" minOccurs="1" />
+			<xs:element name="name" type="base_shorttext_type" />
+			<xs:element name="pronunciation" type="base_shorttext_type" minOccurs="0"/>
+			<xs:element name="audio_file_url" type="base_shorttext_type" minOccurs="0"/>
+			<xs:element name="video_file_url" type="base_shorttext_type" minOccurs="0"/>
+			<xs:element ref="definitionArray" />
+			<xs:element ref="usageArray" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="word" type="word_type" />
+
+	<xs:complexType name="definitionArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Word Definitions</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="wordDefinition" minOccurs="1" maxOccurs="10"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="definitionArray" type="definitionArray_type" />
+
+	<xs:complexType name="wordDefinition_type">
+		<xs:sequence>
+			<xs:element ref="id_wordDefinition" minOccurs="0" />
+			<xs:element name="partsOfSpeech" type="partsOfSpeech_kind" />
+			<xs:element name="definition" type="base_doublelongtext_type" />
+			<xs:element name="sampletext" type="xs:string" minOccurs="0" />
+			<xs:element name="synonym" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="antonym" type="base_longtext_type" minOccurs="0" />
+			<xs:element name="thesaurus" type="base_longtext_type" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="wordDefinition" type="wordDefinition_type" />
+
+	<xs:complexType name="usageArray_type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">List of Word Usages</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="wordUsage" minOccurs="1" maxOccurs="10"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="usageArray" type="usageArray_type" />
+
+	<xs:complexType name="wordUsage_type">
+		<xs:sequence>
+			<xs:element ref="id_wordUsage" minOccurs="0" />
+			<xs:element name="text" type="xs:string" />
+			<xs:element name="source" type="base_doublelongtext_type" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="wordUsage" type="wordUsage_type" />
+
+
+
+
+
+	<!-- id_word can be any positive number between 1 and 999. 
+		Will be prepended with the database id_clist_type to generate the database 
+		id_word id. -->
+	<xs:simpleType name="id_word_type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="100" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="id_word" type="id_word_type" />
+
+	<!-- id_clist_type can be any number between 0 and 999.  -->
+	<xs:simpleType name="id_clist_type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0" />
+			<xs:maxInclusive value="999" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="id_clist" type="id_clist_type" />
+
+	<!-- id_clist_type can be any number between 0 and 999.  -->
+	<xs:simpleType name="id_wordDefinition_type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="10" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="id_wordDefinition" type="id_wordDefinition_type" />
+
+	<!-- id_clist_type can be any number between 0 and 999.  -->
+	<xs:simpleType name="id_wordUsage_type">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="10" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="id_wordUsage" type="id_wordUsage_type" />
+
+	<!-- partsOfSpeech type can be one of the parts of speech. -->
+	<xs:simpleType name="partsOfSpeech_kind">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="N" />
+			<xs:enumeration value="V" />
+			<xs:enumeration value="Adj" />
+			<xs:enumeration value="Adv" />
+			<xs:enumeration value="Pro" />
+			<xs:enumeration value="P" />
+			<xs:enumeration value="C" />
+			<xs:enumeration value="I" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</xs:schema> 

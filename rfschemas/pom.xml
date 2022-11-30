@@ -1,0 +1,100 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+<parent>
+    <groupId>com.etester.web</groupId>
+    <artifactId>etester-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</parent>
+
+    <artifactId>loadschemas</artifactId>
+    <packaging>jar</packaging>
+    <name>RF Load Schemas</name>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- This setting works for JDK 9+.  However is backlwatd compatible to 8 -->
+        <maven.compiler.release>1.8</maven.compiler.release>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
+        <!-- Technically, you do not need jaxb-impl since we are only using XJC to generate code.  Impl is needed to use the code in actual processing of XML messages -->
+        
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>4.0.1</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+        <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/jaxb2-maven-plugin -->
+        <!-- I am using Mojo's JAXB-2 Maven plugin is used to create an object graph from
+            XSDs based on the JAXB 2.x implementation and to generate XSDs from JAXB annotated
+            Java classes. -->
+            <plugin>
+
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <!-- Documentation for this release: https://www.mojohaus.org/jaxb2-maven-plugin/Documentation/v3.1.0/index.html -->
+                <version>3.1.0</version>
+	        <executions>
+		    <execution>
+		        <id>xjc-RfLoadUsersSchema</id>
+		        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/main/resources/RfLoadUsersSchema.xsd</source>
+                            </sources>
+                            <packageName>com.rulefree.rfloadusersschema</packageName>
+                            <!-- Don't clear the output directory before generating the sources. Clearing the output directory removes any other packages schema from above. -->
+                            <clearOutputDir>false</clearOutputDir>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>xjc-RfLoadDataSchema</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/main/resources/RfLoadDataSchema.xsd</source>
+                            </sources>
+                            <packageName>com.rulefree.rfloaddataschema</packageName>
+                            <!-- Don't clear the output directory before generating the sources. Clearing the output directory removes any other packages schema from above. -->
+                            <clearOutputDir>false</clearOutputDir>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <!-- Note that the Properties set at the Project level are being overridden here. Feel free to only use one of them: project level or Plugin level. -->
+                    <!-- These settings work for 1.8 (java 8) or less -->
+                    <source>11</source>
+                    <target>11</target>
+                    <!-- These settings work for JDK 9+ -->
+                    <release>11</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
