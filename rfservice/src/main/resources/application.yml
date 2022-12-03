@@ -1,0 +1,58 @@
+spring:
+  autoconfigure:
+    exclude:
+#      - org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration
+  application:
+    name: etester-load-content-soap-webservice
+
+  mail:
+    host: email-smtp.us-east-1.amazonaws.com
+    username: AKIAJC75PYCNKTRMPRWA
+    password: AuDTa8mOpUsPXyKlzxGJrLxgUb0v3sSLeAtuxgs0lCyY
+    properties:
+      mail.smtps.auth: true
+      mail.transport.protocol: smtp
+      mail.smtp.port: 587
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true
+      mail.debug: true
+      mail.smtp.from: contactus@etester.com
+
+  security.user.name: sesi
+  security.user.password: $2a$10$QYE2p4KI9gMm/z1/HLoKEu00akAdZgPrUC7Pb8ji9Vj9CZ7jWVLxW
+  security.user.roles: user
+
+  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/rulefree
+    username: rulefree_user
+    password: rulefree_user
+
+  jpa.show-sql: true
+#  jpa.properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  hibernate.ddl-auto: update
+
+#  security:
+#    user:
+#      name: sesi
+#      password: admin
+
+# App Properties
+etester.app:
+  jwtCookieName: etester
+# jwtSecret needs to be big in size.  When I used a secret of 'EtesterSecretKey', I get this error "The signing key's size is 96 bits which is not secure enough for the HS512 algorithm" 
+# I icreased it to 'EtesterSecretKeyEashwarPooja3311' and multiplied by 3
+  jwtSecret: EtesterSecretKeyEashwarPooja3311EtesterSecretKeyEashwarPooja3311EtesterSecretKeyEashwarPooja3311
+  jwtExpiration: 86400
+
+server:
+  port : 8081
+
+logging:
+  level:
+    org:
+      springframework:
+        security: debug
+    com.etester:
+      security: trace
+      data: debug

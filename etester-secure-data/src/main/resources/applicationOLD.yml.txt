@@ -1,0 +1,21 @@
+spring:
+  autoconfigure:
+    exclude:
+#      - org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration
+  application:
+    name: security_test
+  datasource:
+    url: jdbc:mysql://localhost:3306/testdb?useSSL=false
+    username: testdb_user
+    password: testdb_user
+
+  spring:
+    jpa.show-sql: true
+    jpa.properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate.ddl-auto: update
+
+# App Properties
+etester.app:
+  jwtCookieName: etester
+  jwtSecret: EtesterSecretKey
+  jwtExpiration: 86400

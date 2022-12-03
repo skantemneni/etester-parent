@@ -1,0 +1,40 @@
+spring:
+  autoconfigure:
+    exclude:
+#      - org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration
+  application:
+    name: etester-load-content-command-line
+
+  mail:
+    host: email-smtp.us-east-1.amazonaws.com
+    username: AKIAJC75PYCNKTRMPRWA
+    password: AuDTa8mOpUsPXyKlzxGJrLxgUb0v3sSLeAtuxgs0lCyY
+    properties:
+      mail.smtps.auth: true
+      mail.transport.protocol: smtp
+      mail.smtp.port: 587
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true
+      mail.debug: true
+      mail.smtp.from: contactus@etester.com
+
+
+# We should also specify the spring.main.web-application-type=NONE Spring property. This property will explicitly inform Spring that this isn't a web application.
+  main.web-application-type: NONE
+
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/rulefree
+    username: rulefree_user
+    password: rulefree_user
+
+  jpa.show-sql: true
+  hibernate.ddl-auto: update
+
+logging:
+  level:
+    org:
+      springframework:
+        security: debug
+    com.etester:
+      security: trace
+      data: debug

@@ -1,0 +1,303 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <!--  <context:component-scan base-package="com.rulefree.rfserver.domain.jpa"/> -->
+
+    <context:annotation-config/>
+
+    <tx:annotation-driven/>
+
+<!-- Email stuff -->	
+<!-- 	<bean id="mailSession"  -->
+<!-- 		class="org.springframework.jndi.JndiObjectFactoryBean">  -->
+<!-- 		<property name="jndiName" value="java:comp/env/mail/Session" />  -->
+<!-- 	</bean> -->
+
+<!-- 
+	<bean id="mailSender" 
+        class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="session" ref="mailSession"/>
+    </bean>
+ -->    
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="email-smtp.us-east-1.amazonaws.com" />
+		<property name="username" value="AKIAJC75PYCNKTRMPRWA" />
+		<property name="password" value="AuDTa8mOpUsPXyKlzxGJrLxgUb0v3sSLeAtuxgs0lCyY" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtps.auth">true</prop>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.port">587</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.starttls.required">true</prop>
+				<prop key="mail.debug">true</prop> 
+				<prop key="mail.smtp.from">contactus@etester.com</prop>
+			</props>
+		</property>
+	</bean>
+
+<!-- 	<bean id="mailSender2" class="org.springframework.mail.javamail.JavaMailSenderImpl"> -->
+<!-- 		<property name="host" value="email-smtp.us-east-1.amazonaws.com" /> -->
+<!-- 		<property name="port" value="465" /> -->
+<!-- 		<property name="protocol" value="smtps" /> -->
+<!-- 		<property name="username" value="AKIAJC75PYCNKTRMPRWA" /> -->
+<!-- 		<property name="password" value="AuDTa8mOpUsPXyKlzxGJrLxgUb0v3sSLeAtuxgs0lCyY" /> -->
+<!-- 		<property name="javaMailProperties"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="mail.smtps.auth">true</prop> -->
+<!-- 				<prop key="mail.smtp.ssl.enable">true</prop> -->
+<!-- 				<prop key="mail.transport.protocol">smtps</prop> -->
+<!-- 				<prop key="mail.debug">true</prop>  -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+    
+    <bean id="newWebuserMailMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from" value="contactus@etester.com"/>
+        <property name="to" value="etester2015@gmail.com"/>
+        <property name="subject" value="eTester.com - Verify your user account."/>
+        <property name="text">
+            <value><![CDATA[
+Dear User,
+
+A new account has been created for you on eTester.com :
+You need to verify and activate it.  
+
+Please click on the link below or copy and paste the same in a new browser window.
+Note that the activation tokens are only good for 60 minutes...  
+Name : %s
+Account : %s
+Activation Link : %s
+			]]></value>
+        </property>
+    </bean>
+    
+    <bean id="resetPasswordMailMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from" value="contactus@etester.com"/>
+        <property name="to" value="etester2015@gmail.com"/>
+        <property name="subject" value="eTester.com - Confirm your new password."/>
+        <property name="text">
+            <value><![CDATA[
+Dear User,
+
+An update to your user account has been requested.  
+If you did not initiate this transaction, please ignore this message and continue 
+using eTester with your existing password.   
+
+If you did, in fact, initiate a password reset, please verify the update by clicking 
+on the link below or copying and pasting the same in a new browser window.
+Note that the Password Reset tokens are only good for 60 minutes...  
+
+Name : %s
+Account : %s
+Password Reset Verification Link : %s
+			]]></value>
+        </property>
+    </bean>
+    
+    <bean id="webuserNotifier"
+          class="com.rf.web.xqee.server.email.EmailWebuserNotifier">
+        <property name="mailSender" ref="mailSender"/>
+        <property name="newWebuserMailMessage" ref="newWebuserMailMessage"/>
+        <property name="resetPasswordMailMessage" ref="resetPasswordMailMessage"/>
+    </bean>
+
+    
+	<!-- THYMELEAF: Template Resolver for email templates -->
+	<bean id="emailTemplateResolver" class="org.thymeleaf.templateresolver.ClassLoaderTemplateResolver">
+		<property name="prefix" value="mailtemplates/" />
+		<property name="templateMode" value="HTML5" />
+		<property name="characterEncoding" value="UTF-8" />
+ 		<property name="order" value="1" />
+	</bean>
+ 
+	<!-- THYMELEAF: Template Resolver for webapp pages   -->
+	<!-- (we would not need this if our app was not web) -->
+	<bean id="webTemplateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<property name="prefix" value="/WEB-INF/templates/" />
+		<property name="templateMode" value="HTML5" />
+		<property name="characterEncoding" value="UTF-8" />
+		<property name="order" value="2" />
+	</bean>
+ 
+	<!-- THYMELEAF: Template Engine (Spring3-specific version) -->
+	<bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
+		<property name="templateResolvers">
+			<set>
+				<ref bean="emailTemplateResolver" />
+				<ref bean="webTemplateResolver" />
+			</set>
+		</property>
+	</bean>
+ 
+	<!-- THYMELEAF: View Resolver - implementation of Spring's ViewResolver interface -->
+	<!-- (May not need this - we would not need this if our app was not web)                              -->
+	<bean id="viewResolver" class="org.thymeleaf.spring3.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="templateEngine" />
+		<property name="characterEncoding" value="UTF-8" />
+	</bean>
+    
+	<!-- Service class that uses THYMELEAF templates -->
+	<bean id="emailNotifierService"
+          class="com.rf.web.xqee.server.email.EmailNotifierService">
+        <property name="mailSender" ref="mailSender"/>
+        <property name="templateEngine" ref="templateEngine"/>
+    </bean>
+
+	
+    
+    
+<!-- Database stuff -->	
+    
+	<bean id="dataSource" 
+		class="org.springframework.jndi.JndiObjectFactoryBean"> 
+		<property name="jndiName" value="java:comp/env/jdbc/RFDB" /> 
+	</bean>
+
+<!-- 	
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/rulefree" />
+		<property name="username" value="rulefree_user" />
+		<property name="password" value="rulefree_user" />
+	</bean>
+ -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+<!-- 
+    <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="user"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="databasePlatform"
+                          value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+                <property name="showSql" value="true"/>
+                <property name="generateDdl" value="false"/>
+            </bean>
+        </property>
+    </bean>
+ -->
+
+    <bean id="adminControllerDao"
+          class="com.rf.web.xqee.server.domain.jdbc.JdbcAdminControllerDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+    <bean id="userDao"
+          class="com.rf.web.xqee.server.domain.jdbc.JdbcUserDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="passwordEncoder" ref="passwordEncoder" />
+		<property name="webuserNotifier" ref="webuserNotifier"/>
+		<property name="emailNotifierService" ref="emailNotifierService"/>
+	</bean>
+
+    <bean id="usergroupDao"
+          class="com.rf.web.xqee.server.domain.jdbc.JdbcUsergroupDao">
+		<property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="profileDao"
+          class="com.rf.web.xqee.server.domain.jdbc.JdbcProfileDao">
+		<property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="usertestDao"
+          class="com.rf.web.xqee.server.domain.jdbc.JdbcUsertestDao">
+		<property name="dataSource" ref="dataSource" />
+    </bean>
+
+	<bean id="testDao"
+		class="com.rf.web.xqee.server.domain.jdbc.JdbcTestDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="testsegmentDao"
+		class="com.rf.web.xqee.server.domain.jdbc.JdbcTestsegmentDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="usertestresponseDao"
+		class="com.rf.web.xqee.server.domain.jdbc.JdbcUsertestresponseDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="channelDao"
+		class="com.rf.web.xqee.server.domain.jdbc.JdbcChannelDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="levelDao"
+		class="com.rf.web.xqee.server.domain.jdbc.JdbcLevelDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+		<bean id="gradelevelDao"
+		class="com.rf.web.xqee.server.domain.jdbc.JdbcGradelevelDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="topicDao"
+		class="com.rf.web.xqee.server.domain.jdbc.JdbcTopicDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="skillDao"
+		class="com.rf.web.xqee.server.domain.jdbc.JdbcSkillDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="sectionDao"
+		class="com.rf.web.xqee.server.domain.jdbc.JdbcSectionDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="questionDao"
+		class="com.rf.web.xqee.server.domain.jdbc.JdbcQuestionDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="wlWordlistDao"
+		class="com.rf.web.xqee.server.domain.wordlist.jdbc.JdbcWlWordlistDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="testReportsDao"
+		class="com.rf.web.xqee.server.domain.jdbc.JdbcTestReportsDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	
+<!-- 
+    <bean id="studentlevelDao"
+          class="com.rf.web.xqee.server.domain.jpa.JpaStudentlevelDao">
+    </bean>
+
+    <bean id="studenttopicDao"
+          class="com.rf.web.xqee.server.domain.jpa.JpaStudenttopicDao">
+    </bean>
+ -->
+
+<!-- 
+    <bean id="transactionManager"
+          class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+-->
+
+</beans>

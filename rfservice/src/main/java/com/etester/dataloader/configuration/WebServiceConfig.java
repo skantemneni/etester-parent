@@ -46,19 +46,40 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 	// Follow this approach if your XSD has includes for other xsd's
 	// https://stackoverflow.com/questions/42112775/spring-ws-wsdl-automatic-exposure-xsd-import-are-not-followed
 	// *********************************************************************************************************************
-	@Bean(name="tests")
-	public DefaultWsdl11Definition defaultWsdl11Definition() throws Exception {
+	@Bean(name="data")
+	public DefaultWsdl11Definition defaultWsdl11LoadContentDefinition() throws Exception {
 	    DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-	    wsdl11Definition.setPortTypeName("TestsPort");
+	    wsdl11Definition.setPortTypeName("DataPort");
 	    wsdl11Definition.setLocationUri("/ws");
 	    wsdl11Definition.setTargetNamespace("http://spring.io/guides/gs-producing-web-service");
-	    wsdl11Definition.setSchemaCollection(updateContactXsd());
+	    wsdl11Definition.setSchemaCollection(updateLoadContentContactXsd());
+	    return wsdl11Definition;
+	}   
+
+	// *********************************************************************************************************************
+	// Follow this approach if your XSD has includes for other xsd's
+	// https://stackoverflow.com/questions/42112775/spring-ws-wsdl-automatic-exposure-xsd-import-are-not-followed
+	// *********************************************************************************************************************
+	@Bean(name="users")
+	public DefaultWsdl11Definition defaultWsdl11LoadUsersDefinition() throws Exception {
+	    DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+	    wsdl11Definition.setPortTypeName("UsersPort");
+	    wsdl11Definition.setLocationUri("/ws");
+	    wsdl11Definition.setTargetNamespace("http://spring.io/guides/gs-producing-web-service");
+	    wsdl11Definition.setSchemaCollection(updateLoadUsersContactXsd());
 	    return wsdl11Definition;
 	}   
 
 	@Bean
-	public XsdSchemaCollection updateContactXsd() throws Exception {
+	public XsdSchemaCollection updateLoadContentContactXsd() throws Exception {
 	    CommonsXsdSchemaCollection xsds = new CommonsXsdSchemaCollection(new ClassPathResource("RfLoadDataSchema.xsd"));
+	    xsds.setInline(true); 
+	    return xsds;
+	}
+	
+	@Bean
+	public XsdSchemaCollection updateLoadUsersContactXsd() throws Exception {
+	    CommonsXsdSchemaCollection xsds = new CommonsXsdSchemaCollection(new ClassPathResource("RfLoadUsersSchema.xsd"));
 	    xsds.setInline(true); 
 	    return xsds;
 	}

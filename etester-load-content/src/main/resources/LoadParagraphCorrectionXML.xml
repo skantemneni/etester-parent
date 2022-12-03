@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LoadPracticesections systemid="10" 
+	xmlns="http://www.rulefree.com/RfLoadDataSchema" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.rulefree.com/RfLoadDataSchema RfLoadDataSchema.xsd ">
+  
+  <id_studentlevel>1066</id_studentlevel>
+  <id_studenttopic>10660101</id_studenttopic>
+  <id_studenttopicheading>106601</id_studenttopicheading>
+  
+  <practicesectionArray>
+  
+    <practicesection deletereload="false">
+      <id_section>10660101001</id_section>
+      <name>Beginning Paragraph Correction 1</name>
+      <description>Directions: Read the passage below. Then answer questions about errors in the passage.</description>
+      <section_text>
+	<![CDATA[
+	      My name is 1) <em>Jay Hammond I am</em> a firefighter.  2) I live <em>in 128 Pine Lane, in</em> Jackson, Mississippi.  3) I have <em>two childs</em>. One is a girl named Clair.  4) <em>The other</em> 5) <em>is boy named</em> Thatcher.  6) <em>His name after</em> my father.  I also have a wife named Jenna.  She is 7) <em>beutiful</em>. She has long, dark, soft hair.  8) We also <em>got a dog named Buck</em>.  He is very obedient but sometimes he barks at night and it upsets our neighbors!
+	]]>
+      </section_text>
+      <question_banner>Paragraph Correction</question_banner>
+      <question_heading>Read the question carefully</question_heading>
+      <practicequestionArray>
+      
+        <practicequestion multiple_answers="true">
+       	  <question_text><![CDATA[<em>Jay Hammond I am</em>]]></question_text>
+          <question_addl_info></question_addl_info>
+          <instructions>Hint: There may be multiple correct answers.  Select all of them.</instructions>
+          <practiceanswerArray>
+            <practiceanswer>			<answer_text><![CDATA[Jay. Hammond I am]]></answer_text></practiceanswer>
+            <practiceanswer correct="true">	<answer_text><![CDATA[Jay Hammond. I am]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[Jay Hammond I�m]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[Jay Hammond, I am]]></answer_text></practiceanswer>
+          </practiceanswerArray>
+        </practicequestion>
+        
+        <practicequestion multiple_answers="true">
+       	  <question_text><![CDATA[<em>in 128 Pine Lane, in</em>]]></question_text>
+          <question_addl_info></question_addl_info>
+          <instructions>Hint: There may be multiple correct answers.  Select all of them.</instructions>
+          <practiceanswerArray>
+            <practiceanswer>			<answer_text><![CDATA[on 128 Pine Lane, on]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[in 128 Pine Lane, on]]></answer_text></practiceanswer>
+            <practiceanswer correct="true">	<answer_text><![CDATA[at 128 Pine Lane, in]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[in 128 Pine, Lane in]]></answer_text></practiceanswer>
+          </practiceanswerArray>
+        </practicequestion>
+        
+        <practicequestion>
+       	  <question_text><![CDATA[<em>two childs</em>]]></question_text>
+          <question_addl_info></question_addl_info>
+          <practiceanswerArray>
+            <practiceanswer>			<answer_text><![CDATA[two child]]></answer_text></practiceanswer>
+            <practiceanswer correct="true">	<answer_text><![CDATA[two children]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[two childrens]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[Correct as is]]></answer_text></practiceanswer>
+          </practiceanswerArray>
+        </practicequestion>
+        
+        <practicequestion>
+       	  <question_text><![CDATA[<em>The other</em>]]></question_text>
+          <question_addl_info></question_addl_info>
+          <practiceanswerArray>
+            <practiceanswer>			<answer_text><![CDATA[Other]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[Another]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[The another]]></answer_text></practiceanswer>
+            <practiceanswer correct="true">	<answer_text><![CDATA[Correct as is]]></answer_text></practiceanswer>
+          </practiceanswerArray>
+        </practicequestion>
+        
+        <practicequestion>
+       	  <question_text><![CDATA[<em>is boy named</em>]]></question_text>
+          <question_addl_info></question_addl_info>
+          <practiceanswerArray>
+            <practiceanswer>			<answer_text><![CDATA[is boy name]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[is boy of name]]></answer_text></practiceanswer>
+            <practiceanswer correct="true">	<answer_text><![CDATA[is a boy named]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[is a boy who name]]></answer_text></practiceanswer>
+          </practiceanswerArray>
+        </practicequestion>
+        
+        <practicequestion>
+       	  <question_text><![CDATA[<em>His name after</em>]]></question_text>
+          <question_addl_info></question_addl_info>
+          <practiceanswerArray>
+            <practiceanswer correct="true">	<answer_text><![CDATA[He is named after]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[He has name from]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[His name is same]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[He is same named]]></answer_text></practiceanswer>
+          </practiceanswerArray>
+        </practicequestion>
+        
+        <practicequestion>
+       	  <question_text><![CDATA[<em>beutiful</em>]]></question_text>
+          <question_addl_info></question_addl_info>
+          <practiceanswerArray>
+            <practiceanswer>			<answer_text><![CDATA[butiful]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[beautyful]]></answer_text></practiceanswer>
+            <practiceanswer correct="true">	<answer_text><![CDATA[beautiful]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[beautifull]]></answer_text></practiceanswer>
+          </practiceanswerArray>
+        </practicequestion>
+        
+        <practicequestion>
+       	  <question_text><![CDATA[<em>got a dog named Buck</em>]]></question_text>
+          <question_addl_info></question_addl_info>
+          <practiceanswerArray>
+            <practiceanswer>			<answer_text><![CDATA[got dog named Buck.]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[got a dog name Buck.]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[got dog name of Buck.]]></answer_text></practiceanswer>
+            <practiceanswer correct="true">	<answer_text><![CDATA[have a dog named Buck.]]></answer_text></practiceanswer>
+          </practiceanswerArray>
+        </practicequestion>
+        
+      </practicequestionArray>
+      
+    </practicesection>
+    
+    <practicesection deletereload="false">
+      <id_section>10660101002</id_section>
+      <name>Beginning Paragraph Correction 2</name>
+      <description>Directions: Read the passage below. Then answer questions about errors in the passage.</description>
+      <section_text>
+	<![CDATA[
+	      This morning, 1) I <em>were</em> making toast for 2) <em>brekfast</em>. Then I went to the basement 3) <em>put</em> some clothes in the washer. I heard the smoke alarm.  4) <em>I think</em>, "Someone is burning 5) <em>something</em> I put the soap in the washer. When I got 6) <em>up to stairs</em>, everybody was running out doors. Two fire trucks and a police car were outside of my house. Smoke was coming out of my apartment! My kids 7) <em>stan ding</em> outside. They were 8) <em>weering</em> their pajamas.  My kids! Oh no!  My toast!
+	]]>
+      </section_text>
+      <question_banner>Paragraph Correction</question_banner>
+      <question_heading>Read the question carefully</question_heading>
+      <practicequestionArray>
+      
+        <practicequestion multiple_answers="true">
+       	  <question_text><![CDATA[<em>were</em>]]></question_text>
+          <question_addl_info></question_addl_info>
+          <instructions>Hint: There may be multiple correct answers.  Select all of them.</instructions>
+          <practiceanswerArray>
+            <practiceanswer>			<answer_text><![CDATA[are]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[is]]></answer_text></practiceanswer>
+            <practiceanswer correct="true">	<answer_text><![CDATA[was]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[Correct as is]]></answer_text></practiceanswer>
+          </practiceanswerArray>
+        </practicequestion>
+        
+        <practicequestion multiple_answers="true">
+       	  <question_text><![CDATA[<em>brekfast</em>]]></question_text>
+          <question_addl_info></question_addl_info>
+          <instructions>Hint: There may be multiple correct answers.  Select all of them.</instructions>
+          <practiceanswerArray>
+            <practiceanswer>			<answer_text><![CDATA[brakfast]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[breckfast]]></answer_text></practiceanswer>
+            <practiceanswer correct="true">	<answer_text><![CDATA[breakfast]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[breackfast]]></answer_text></practiceanswer>
+          </practiceanswerArray>
+        </practicequestion>
+        
+        <practicequestion>
+       	  <question_text><![CDATA[<em>put</em>]]></question_text>
+          <question_addl_info></question_addl_info>
+          <practiceanswerArray>
+            <practiceanswer correct="true">	<answer_text><![CDATA[to put]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[for put]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[to puts]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[for putting]]></answer_text></practiceanswer>
+          </practiceanswerArray>
+        </practicequestion>
+        
+        <practicequestion>
+       	  <question_text><![CDATA[<em>I think</em>]]></question_text>
+          <question_addl_info></question_addl_info>
+          <practiceanswerArray>
+            <practiceanswer>			<answer_text><![CDATA[Thinked]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[I thinked]]></answer_text></practiceanswer>
+            <practiceanswer correct="true">	<answer_text><![CDATA[I thought]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[I am thought]]></answer_text></practiceanswer>
+          </practiceanswerArray>
+        </practicequestion>
+        
+        <practicequestion>
+       	  <question_text><![CDATA[<em>something</em>]]></question_text>
+          <question_addl_info></question_addl_info>
+          <practiceanswerArray>
+            <practiceanswer>			<answer_text><![CDATA[something! I]]></answer_text></practiceanswer>
+            <practiceanswer correct="true">	<answer_text><![CDATA[something!" I]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[something"! I]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[something"? I]]></answer_text></practiceanswer>
+          </practiceanswerArray>
+        </practicequestion>
+        
+        <practicequestion>
+       	  <question_text><![CDATA[<em>up to stairs</em>]]></question_text>
+          <question_addl_info></question_addl_info>
+          <practiceanswerArray>
+            <practiceanswer correct="true">	<answer_text><![CDATA[upstairs]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[to upstairs]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[the upstairs]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[Correct as is]]></answer_text></practiceanswer>
+          </practiceanswerArray>
+        </practicequestion>
+        
+        <practicequestion>
+       	  <question_text><![CDATA[<em>stan ding</em>]]></question_text>
+          <question_addl_info></question_addl_info>
+          <practiceanswerArray>
+            <practiceanswer>			<answer_text><![CDATA[was standing]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[are standing]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[were stand]]></answer_text></practiceanswer>
+            <practiceanswer correct="true">	<answer_text><![CDATA[were standing]]></answer_text></practiceanswer>
+          </practiceanswerArray>
+        </practicequestion>
+        
+        <practicequestion>
+       	  <question_text><![CDATA[<em>weering</em>]]></question_text>
+          <question_addl_info></question_addl_info>
+          <practiceanswerArray>
+            <practiceanswer>			<answer_text><![CDATA[waring]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[wareing]]></answer_text></practiceanswer>
+            <practiceanswer correct="true">	<answer_text><![CDATA[wearing]]></answer_text></practiceanswer>
+            <practiceanswer>			<answer_text><![CDATA[Correct as is]]></answer_text></practiceanswer>
+          </practiceanswerArray>
+        </practicequestion>
+        
+      </practicequestionArray>
+
+    </practicesection>
+
+  </practicesectionArray>
+  
+</LoadPracticesections>
+
+
+

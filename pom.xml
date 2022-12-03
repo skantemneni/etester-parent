@@ -1,16 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
   <modelVersion>4.0.0</modelVersion>
+    
   <groupId>com.etester</groupId>
+    
   <artifactId>etester-parent</artifactId>
+    
   <version>1.0-SNAPSHOT</version>
+    
   <packaging>pom</packaging>
+    
   <name>EtesterParent</name>
+    
   <description>Etester Parent</description>
-  
-<modules>
+    
+
+  <modules>
+        
+    <module>etester-data-domain</module>
     <module>rfschemas</module>
+    <module>etester-load-content</module>
     <module>rfservice</module>
-</modules>
+    <module>etester-secure-data</module>
+      
+  </modules>
+    
   
-  
+
 </project>
