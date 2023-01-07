@@ -19,10 +19,11 @@
   <modules>
         
     <module>etester-data-domain</module>
+    <module>etester-auth-domain</module>
+    <module>etester-secure-data</module>
     <module>rfschemas</module>
     <module>etester-load-content</module>
     <module>rfservice</module>
-    <module>etester-secure-data</module>
       
   </modules>
     

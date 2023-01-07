@@ -140,8 +140,13 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 	// Instead, use requestMatchers or HttpSecurity#securityMatchers.
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
+		http.cors().
+			and().
+			csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).
+			and().
+			sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
+			and().
+			authorizeRequests()
 				.requestMatchers(LOGIN_URL_WHITELIST).permitAll().requestMatchers(AUTHENTICATED_WHITELIST).hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
 //        .antMatchers(H2_CONSOLE_PATH).permitAll()
 				.anyRequest().authenticated()
